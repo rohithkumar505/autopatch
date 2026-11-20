@@ -105,15 +105,18 @@ def create_app() -> FastAPI:
 
     @application.middleware("http")
     async def vercel_state_sync(request: Request, call_next):
+        log = logging.getLogger("autopatch.storage")
         if request.url.path.startswith("/api"):
-            sync_before_request()
+            try:
+                sync_before_request()
+            except Exception:
+                log.exception("sync before failed")
         response = await call_next(request)
         if serverless_persistence_enabled() and request.url.path.startswith("/api"):
             if request.method not in ("GET", "HEAD", "OPTIONS"):
                 try:
                     sync_after_request()
                 except Exception as exc:
-                    log = logging.getLogger("autopatch.storage")
                     log.exception("persist failed")
                     return JSONResponse({"detail": str(exc)}, status_code=503)
         return response
