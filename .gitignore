@@ -20,3 +20,4 @@ public/*
 *.db
 *.db-wal
 *.db-shm
+.vercel
