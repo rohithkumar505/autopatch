@@ -9,6 +9,8 @@ dist/
 data/
 frontend/node_modules/
 frontend/dist/
+node_modules/
+tools/js/node_modules/
 public/*
 !public/.gitkeep
 .env
