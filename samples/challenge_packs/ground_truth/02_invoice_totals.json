@@ -1,0 +1,21 @@
+{
+  "project": "02_invoice_totals",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "apply_discount",
+      "category": "incorrect_output",
+      "summary": "Adds discount instead of subtracting."
+    },
+    {
+      "function": "total_with_tax",
+      "category": "incorrect_output",
+      "summary": "Applies tax before discount."
+    },
+    {
+      "function": "Invoice.add_line",
+      "category": "incorrect_output",
+      "summary": "Mutable default shared list across invoices."
+    }
+  ]
+}

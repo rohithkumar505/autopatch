@@ -1,0 +1,21 @@
+{
+  "project": "07_metric_windows",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "average",
+      "category": "crash",
+      "summary": "ZeroDivisionError on empty input."
+    },
+    {
+      "function": "rate_per_minute",
+      "category": "crash",
+      "summary": "Division by zero when start==end."
+    },
+    {
+      "function": "rolling_max",
+      "category": "incorrect_output",
+      "summary": "Window slice excludes current index."
+    }
+  ]
+}

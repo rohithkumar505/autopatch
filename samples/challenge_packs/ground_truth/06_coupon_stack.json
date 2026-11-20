@@ -1,0 +1,21 @@
+{
+  "project": "06_coupon_stack",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "parse_coupon",
+      "category": "security",
+      "summary": "Uses eval on coupon strings."
+    },
+    {
+      "function": "apply_codes",
+      "category": "incorrect_output",
+      "summary": "Flat coupon adds instead of subtracting."
+    },
+    {
+      "function": "stacked_total",
+      "category": "incorrect_output",
+      "summary": "Mutable default tracks prior calls."
+    }
+  ]
+}

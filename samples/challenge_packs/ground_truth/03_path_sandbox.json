@@ -1,0 +1,21 @@
+{
+  "project": "03_path_sandbox",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "safe_join",
+      "category": "security",
+      "summary": "Strips .. substring instead of rejecting traversal."
+    },
+    {
+      "function": "open_user_file",
+      "category": "security",
+      "summary": "No containment check after join."
+    },
+    {
+      "function": "is_valid_segment",
+      "category": "incorrect_output",
+      "summary": "Allows names starting with /."
+    }
+  ]
+}

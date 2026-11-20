@@ -1,0 +1,41 @@
+{
+  "project": "marks_calculator",
+  "note": "Bugs seeded on purpose. Kept outside the sample folder so the scan cannot read it.",
+  "bugs": [
+    {
+      "function": "parse_marks",
+      "category": "security",
+      "summary": "eval() on teacher input runs arbitrary code, e.g. \"__import__('os').system('...')\"."
+    },
+    {
+      "function": "get_grade",
+      "category": "incorrect_output",
+      "summary": "No range check: -5 returns 'F' and 150 returns 'A' instead of being rejected."
+    },
+    {
+      "function": "calculate_percentage",
+      "category": "crash",
+      "summary": "total=0 raises ZeroDivisionError; obtained outside 0..total gives a percentage below 0 or above 100."
+    },
+    {
+      "function": "class_average",
+      "category": "crash",
+      "summary": "Empty list raises ZeroDivisionError (also reached through report_card with no subjects)."
+    },
+    {
+      "function": "passed_count",
+      "category": "edge_case",
+      "summary": "Uses > instead of >=, so a student with exactly the pass mark (40) is counted as failed."
+    },
+    {
+      "function": "top_students",
+      "category": "incorrect_output",
+      "summary": "Sorts ascending, so it returns the lowest scorers instead of the highest."
+    },
+    {
+      "function": "add_marks",
+      "category": "incorrect_output",
+      "summary": "Mutable default argument: results from earlier calls leak into later calls."
+    }
+  ]
+}

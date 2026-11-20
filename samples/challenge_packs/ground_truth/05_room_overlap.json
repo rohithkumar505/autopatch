@@ -1,0 +1,16 @@
+{
+  "project": "05_room_overlap",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "overlaps",
+      "category": "edge_case",
+      "summary": "Inclusive interval logic blocks adjacent meetings."
+    },
+    {
+      "function": "free_slots",
+      "category": "incorrect_output",
+      "summary": "Stops before last valid slot (day_end - step)."
+    }
+  ]
+}

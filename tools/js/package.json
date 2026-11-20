@@ -1,0 +1,8 @@
+{
+  "name": "autopatch-js-tools",
+  "private": true,
+  "description": "Parser used by AutoPatch Core to analyze JavaScript and TypeScript (it never runs the analyzed code)",
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}

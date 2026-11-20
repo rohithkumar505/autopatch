@@ -1,0 +1,21 @@
+{
+  "project": "04_priority_inbox",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "top_messages",
+      "category": "incorrect_output",
+      "summary": "Ranks lowest priority first."
+    },
+    {
+      "function": "urgent_count",
+      "category": "edge_case",
+      "summary": "Uses > 3 instead of >= 3."
+    },
+    {
+      "function": "load_filters",
+      "category": "incorrect_output",
+      "summary": "Mutable default shared filter table."
+    }
+  ]
+}

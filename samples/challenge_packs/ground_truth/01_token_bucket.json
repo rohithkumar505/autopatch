@@ -1,0 +1,21 @@
+{
+  "project": "01_token_bucket",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "TokenBucket._level",
+      "category": "edge_case",
+      "summary": "Refill subtracts 1 and only refills when added>1, starving clients."
+    },
+    {
+      "function": "TokenBucket.consume",
+      "category": "edge_case",
+      "summary": "Uses > instead of >= so consuming exact remaining tokens fails."
+    },
+    {
+      "function": "merge_limits",
+      "category": "incorrect_output",
+      "summary": "Mutable default dict leaks entries between calls."
+    }
+  ]
+}

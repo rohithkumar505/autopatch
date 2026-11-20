@@ -1,0 +1,17 @@
+{
+  "project": "shop_inventory",
+  "note": "Second sample, written differently from marks_calculator, to check that AutoPatch Core generalizes.",
+  "bugs": [
+    {"function": "average_price", "category": "crash", "summary": "Empty price list raises ZeroDivisionError."},
+    {"function": "load_order", "category": "security", "summary": "eval() on console input runs arbitrary code."},
+    {"function": "discount_band", "category": "incorrect_output", "summary": "Negative or >MAX_DISCOUNT percentages get a band instead of being rejected."},
+    {"function": "cheapest_products", "category": "incorrect_output", "summary": "Sorts descending, so it returns the most expensive products."},
+    {"function": "well_stocked", "category": "edge_case", "summary": "Uses > minimum_stock, so exactly 5 items does not count as well stocked."},
+    {"function": "add_to_cart", "category": "state_corruption", "summary": "Mutable default cart shared between calls."},
+    {"function": "find_product", "category": "security", "summary": "SQL built with an f-string from `name` (SQL injection)."},
+    {"function": "first_sku", "category": "crash", "summary": "Empty list raises IndexError."}
+  ],
+  "not_bugs": [
+    {"function": "restock_needed", "summary": "`q < minimum_stock` is correct: exactly the minimum needs no restock."}
+  ]
+}

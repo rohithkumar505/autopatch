@@ -1,0 +1,12 @@
+{
+  "project": "library_app",
+  "note": "Third sample, for the detectors added in AutoPatch Core 1.1.",
+  "bugs": [
+    {"function": "find_book", "kind": "not-found-in-loop", "summary": "Prints 'Book not found' for every non-matching book."},
+    {"function": "total_copies", "kind": "off-by-one-range", "summary": "range(len(shelf) + 1) reads past the end."},
+    {"function": "availability", "kind": "missing-return", "summary": "Negative copies fall off the end and return None."},
+    {"function": "save_report", "kind": "unclosed-resource", "summary": "The file is never closed."},
+    {"function": "desk", "kind": "unchecked-none-result", "summary": "sign_in() can return None; members[user] then raises KeyError."},
+    {"function": "run_command", "kind": "code-injection", "summary": "eval() on text typed at the desk (reached from input() in desk())."}
+  ]
+}

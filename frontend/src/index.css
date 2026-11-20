@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-bg: var(--ap-bg);
+  --color-panel: var(--ap-panel);
+  --color-panel2: var(--ap-panel2);
+  --color-border: var(--ap-border);
+  --color-fg: var(--ap-fg);
+  --color-muted: var(--ap-muted);
+  --color-accent: var(--ap-accent);
+  --color-accent-fg: var(--ap-accent-fg);
+  --color-hover: var(--ap-hover);
+  --color-activity: var(--ap-activity);
+  --color-status: var(--ap-status);
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+:root {
+  --ap-bg: #f3f4f6;
+  --ap-panel: #ffffff;
+  --ap-panel2: #f8f9fb;
+  --ap-border: #e2e5ea;
+  --ap-fg: #1f2328;
+  --ap-muted: #5f6873;
+  --ap-accent: #2563eb;
+  --ap-accent-fg: #ffffff;
+  --ap-hover: #eef1f5;
+  --ap-activity: #e9ecf1;
+  --ap-status: #2563eb;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --ap-bg: #1e1e1e;
+  --ap-panel: #252526;
+  --ap-panel2: #2b2b2c;
+  --ap-border: #3a3a3c;
+  --ap-fg: #d4d4d4;
+  --ap-muted: #9a9a9e;
+  --ap-accent: #3b82f6;
+  --ap-accent-fg: #ffffff;
+  --ap-hover: #2f2f31;
+  --ap-activity: #333333;
+  --ap-status: #1d4ed8;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ap-bg);
+  color: var(--ap-fg);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Monaco decorations for finding locations */
+.ap-line-critical { background: rgba(239, 68, 68, 0.16); }
+.ap-line-high { background: rgba(249, 115, 22, 0.14); }
+.ap-line-medium { background: rgba(234, 179, 8, 0.13); }
+.ap-line-low { background: rgba(148, 163, 184, 0.14); }
+.ap-glyph-critical, .ap-glyph-high, .ap-glyph-medium, .ap-glyph-low {
+  border-radius: 50%;
+  margin-left: 5px;
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: 6px;
+}
+.ap-glyph-critical { background: #ef4444; }
+.ap-glyph-high { background: #f97316; }
+.ap-glyph-medium { background: #eab308; }
+.ap-glyph-low { background: #94a3b8; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--ap-muted) 35%, transparent); border-radius: 6px; }
+::-webkit-scrollbar-track { background: transparent; }

@@ -1,0 +1,21 @@
+{
+  "project": "10_slot_grid",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "align_grid",
+      "category": "edge_case",
+      "summary": "Inclusive close creates extra slot past hours."
+    },
+    {
+      "function": "day_capacity",
+      "category": "incorrect_output",
+      "summary": "Returns booked count instead of free capacity."
+    },
+    {
+      "function": "parse_booking",
+      "category": "security",
+      "summary": "eval() on booking payloads."
+    }
+  ]
+}

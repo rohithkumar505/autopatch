@@ -1,0 +1,21 @@
+{
+  "project": "08_session_filter",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "parse_filter",
+      "category": "security",
+      "summary": "eval() on filter expressions."
+    },
+    {
+      "function": "match_role",
+      "category": "incorrect_output",
+      "summary": "Substring match on role."
+    },
+    {
+      "function": "active_only",
+      "category": "edge_case",
+      "summary": "Drops sessions expiring exactly at now."
+    }
+  ]
+}

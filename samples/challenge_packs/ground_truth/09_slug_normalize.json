@@ -1,0 +1,21 @@
+{
+  "project": "09_slug_normalize",
+  "note": "Host-only ground truth; not inside zip.",
+  "bugs": [
+    {
+      "function": "slugify",
+      "category": "incorrect_output",
+      "summary": "Does not collapse repeated dashes."
+    },
+    {
+      "function": "unique_slug",
+      "category": "incorrect_output",
+      "summary": "Broken suffix recursion on collision."
+    },
+    {
+      "function": "is_reserved",
+      "category": "edge_case",
+      "summary": "Incomplete reserved prefix checks."
+    }
+  ]
+}
