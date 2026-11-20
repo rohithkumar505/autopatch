@@ -15,7 +15,7 @@ import threading
 from pathlib import Path
 
 from fastapi import HTTPException
-from vercel.blob import BlobNotFoundError
+from vercel.blob.errors import BlobNotFoundError
 from vercel.blob.sync import get_blob, head_blob, put_blob
 
 from autopatch.config import paths
