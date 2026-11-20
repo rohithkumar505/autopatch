@@ -9,10 +9,5 @@
       "maxDuration": 60,
       "memory": 2048
     }
-  },
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/api/(.*)", "dest": "/index.py" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  }
 }
