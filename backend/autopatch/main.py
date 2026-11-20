@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from autopatch import __version__
@@ -79,10 +79,23 @@ def create_app() -> FastAPI:
         (FixError, 400), (GitError, 400), (FileNotFoundError, 404), (ValueError, 400),
     ]:
         application.add_exception_handler(exc_type, _error(code))
-    if not _SERVERLESS:
-        dist = _frontend_dist()
-        if dist.is_dir():
-            application.mount("/", StaticFiles(directory=dist, html=True), name="frontend")
+    dist = _frontend_dist()
+    if _SERVERLESS:
+        # Vercel ships only the FastAPI lambda (no separate static layer); serve built UI from public/.
+        if dist.is_dir() and (dist / "index.html").is_file():
+            assets = dist / "assets"
+            if assets.is_dir():
+                application.mount("/assets", StaticFiles(directory=assets), name="assets")
+
+            @application.get("/", include_in_schema=False)
+            async def _spa_root():
+                return FileResponse(dist / "index.html")
+
+            @application.get("/index.html", include_in_schema=False)
+            async def _spa_index():
+                return FileResponse(dist / "index.html")
+    elif dist.is_dir():
+        application.mount("/", StaticFiles(directory=dist, html=True), name="frontend")
     return application
 
 
