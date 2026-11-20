@@ -28,6 +28,8 @@ def health():
 
 @router.get("/status")
 def status():
+    from autopatch.storage.serverless import persistence_status
+
     cfg = settings.get_all()
     try:
         active = sandbox.choose(cfg["testing.sandbox"], cfg["testing.allow_limited"])
@@ -35,7 +37,7 @@ def status():
     except sandbox.SandboxUnavailable as exc:
         sb = {"ready": False, "message": str(exc)}
     return {"version": __version__, "ai": ai_status(cfg), "sandbox": sb,
-            "active_jobs": len(jobs.active_jobs())}
+            "active_jobs": len(jobs.active_jobs()), "persistence": persistence_status()}
 
 
 # ---------------------------------------------------------------- dashboard

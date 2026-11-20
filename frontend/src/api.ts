@@ -330,6 +330,7 @@ export interface AppStatus {
   version: string;
   ai: { configured: boolean; provider: string; model?: string; message?: string };
   sandbox: { ready: boolean; name?: string; label?: string; isolation?: string; message?: string };
+  persistence?: { mode?: string; ready: boolean; message?: string | null; store_id?: string | null };
   active_jobs: number;
 }
 

@@ -22,6 +22,12 @@ from autopatch.db import get_engine
 from autopatch.pipeline.fix import FixError
 from autopatch.pipeline.history import ReviewError
 from autopatch.testing.sandbox import SandboxUnavailable
+from autopatch.storage.serverless import (
+    persistence_status,
+    serverless_persistence_enabled,
+    sync_after_request,
+    sync_before_request,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -96,6 +102,22 @@ def create_app() -> FastAPI:
                 return FileResponse(dist / "index.html")
     elif dist.is_dir():
         application.mount("/", StaticFiles(directory=dist, html=True), name="frontend")
+
+    @application.middleware("http")
+    async def vercel_state_sync(request: Request, call_next):
+        if request.url.path.startswith("/api"):
+            sync_before_request()
+        response = await call_next(request)
+        if serverless_persistence_enabled() and request.url.path.startswith("/api"):
+            if request.method not in ("GET", "HEAD", "OPTIONS"):
+                try:
+                    sync_after_request()
+                except Exception as exc:
+                    log = logging.getLogger("autopatch.storage")
+                    log.exception("persist failed")
+                    return JSONResponse({"detail": str(exc)}, status_code=503)
+        return response
+
     return application
 
 

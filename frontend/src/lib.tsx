@@ -170,7 +170,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     try {
       const list = await api.projects();
       setProjects(list);
-      setActiveId((cur) => (cur !== null && list.some((p) => p.id === cur) ? cur : list[0]?.id ?? null));
+      setActiveId((cur) => {
+        if (cur !== null && list.some((p) => p.id === cur)) return cur;
+        if (cur !== null && !list.some((p) => p.id === cur)) return list[0]?.id ?? null;
+        return cur ?? list[0]?.id ?? null;
+      });
     } catch {
       /* the status bar shows connection problems */
     } finally {

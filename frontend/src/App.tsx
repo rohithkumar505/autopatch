@@ -164,6 +164,11 @@ export default function App() {
       <footer className="flex h-6 shrink-0 items-center gap-4 overflow-hidden bg-status px-3 text-[12px] text-white">
         <span className="truncate">{active ? active.name : "No project"}</span>
         {active?.last_scan && <span className="hidden truncate sm:inline">Last scan {new Date(active.last_scan.finished_at).toLocaleString()}</span>}
+        {status?.persistence && status.persistence.mode !== "local" && !status.persistence.ready && (
+          <span className="truncate text-amber-200" title={status.persistence.message ?? ""}>
+            Storage not linked — imports will not persist
+          </span>
+        )}
         <span className="ml-auto whitespace-nowrap">{status ? (status.active_jobs ? `${status.active_jobs} job(s) running` : "Idle") : "Server unreachable"}</span>
         <span className="hidden whitespace-nowrap sm:inline">AutoPatch {status?.version ?? ""}</span>
       </footer>
